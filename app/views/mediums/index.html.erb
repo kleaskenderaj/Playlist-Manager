@@ -1,0 +1,59 @@
+<div style="background-color: rgba(255, 255, 255, 0.8); padding: 20px;"> <!-- Transparent white background and padding for the table -->
+<% if logged_in? %>
+  <%= link_to "Add a new song", new_medium_path, style: "color: black;" %>
+  <br><br>
+  <%= form_with(url: mediums_path, method: "get") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search by Title" %>
+    <%= submit_tag "Search" %>
+  <% end %>
+<% end %>
+
+    <h1 style="color: black;">Songs List</h1>
+
+    <table style="width: 40%; color: black; border-collapse: collapse;"> <!-- Black text color for the table -->
+        <thead>
+            <tr>
+                <th style="padding: 10px; text-align: left;">Title</th> 
+                <th style="padding: 10px; text-align: left;">Description</th> 
+                <th style="text-align: left;">Link to Listen</th> 
+                <th style="padding: 20px; text-align: center;">Actions</th> 
+            </tr>
+        </thead>
+        
+        <tbody >
+            <% @medium.each do |medium| %>
+                <tr>
+                    <td style="text-align: left;"><strong><%= medium.title %></strong></td> 
+                    <td style="text-align: left;"><%= medium.description %></td> 
+                    <td style="text-align: left;"><strong><a href="<%= medium.content_url %>" target="_blank">Watch</a></strong></td> 
+                    <td style="display: flex;">
+                    <form action="<%= medium_path(medium) %>" method="get">
+                      <button type="submit" style="color: black; background-color: transparent; border: none;">Show</button>
+                    </form>
+                    
+                    <form action="<%= edit_medium_path(medium) %>" method="get">
+                      <button type="submit" style="color: black; background-color: transparent; border: none;">Edit</button>
+                    </form>
+                  
+                    <%= form_tag medium_path(medium), method: :delete, id: "delete-medium-form" do %>
+                      <button type="submit" style="color: black; background-color: transparent; border: none;" onclick="return confirmDelete();">Delete</button>
+                    <% end %>
+                    
+                    
+                    <script>
+                      function confirmDelete() {
+                        return confirm("Are you sure you want to delete this medium?");
+                      }
+                    </script>
+                    
+                    
+                    
+                    
+                  </td>
+                  
+                  
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

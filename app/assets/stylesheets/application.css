@@ -1,0 +1,49 @@
+.navbar {
+  background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+  padding: 20px; /* Increased padding */
+  border-bottom: 2px solid gray; /* Thick gray border at the bottom */
+}
+
+.navbar-nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 20px; /* Increased padding */
+  border-radius: 20px; /* Round corners */
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+button:hover {
+  background-color: gray; /* Gray background on hover */
+  color: white; /* White text color on hover */
+}
+
+.flash {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.notice {
+  background-color: rgba(144, 238, 144, 0.5); /* Light green with transparency */
+  color: white;
+}
+
+
+body {
+  background-image: url('today2.gif');
+  background-size: cover; /* Scale the background image to cover the entire container */
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Ensures that the background image remains fixed in place */
+}

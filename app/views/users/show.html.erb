@@ -1,0 +1,27 @@
+<div style="background-color: rgba(255, 255, 255, 0.8); padding: 20px;"> 
+<h1 class="text-center mt-4"><%= @user.username %>'s profile </h1>
+<%= gravatar_for @user, size: 80 %><br><br>
+<% if logged_in? && @user == current_user %>
+  <button type="button" class="btn btn-outline-info" style="font-size: 13px; padding: 4px 8px;">
+    <%= button_to "Edit your profile", edit_user_path(@user), method: :get, class: "btn btn-outline-info", style: "font-size: 13px; padding: 4px 8px;" %>
+  </button>
+  <button type="button" class="btn btn-outline-info" style="font-size: 13px; padding: 4px 8px;">
+    <%= button_to 'Delete', user_path(current_user), method: :delete, onclick: "return confirm('Are you sure you want to delete your account?')", class: "btn btn-outline-info", style: "font-size: 13px; padding: 4px 8px;" %>
+  </button>
+<% end %>
+
+  <br><br>
+
+<div style="background-color: rgba(255, 255, 255, 0.8); padding: 20px;"> 
+  <%= will_paginate @playlists, :container => false %>
+</div>
+
+<%= render 'playlists/playlist' %>
+
+<div style="background-color: rgba(255, 255, 255, 0.8); padding: 20px;"> 
+  <%= will_paginate @playlists, :container => false %>
+</div>
+
+
+
+  

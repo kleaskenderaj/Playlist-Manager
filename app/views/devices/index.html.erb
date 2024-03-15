@@ -1,0 +1,41 @@
+<div style="background-color: rgba(255, 255, 255, 0.8); padding: 20px;"> <!-- Transparent white background and padding for the table -->
+    <%= link_to "Add a new device", new_device_path, style: "color: black;" %>
+    <br>
+    <h1 style="color: black;">Device page</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Unique Identifier</th>
+            <th>Show</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>User</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @device.each do |device| %>
+      <% if logged_in? && device.user == current_user %>
+        <tr>
+          <td><strong><%= device.name %></strong></td>
+          <td><strong><%= device.unique_identifier %></strong></td>
+          <td>
+            <%= button_to 'Show', device_path(device), method: :get, class: "button" %>
+          </td>
+          <td>
+            <%= button_to 'Edit', edit_device_path(device), method: :get, class: "button" %>
+          </td>
+          <td>
+            <%= button_to 'Delete', device_path(device), method: :delete, onclick: "return confirm('Are you sure you want to delete this device?');" %>
+          </td>
+          <td>
+            <%= device.user.username if device.user %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+  
+</table>
+

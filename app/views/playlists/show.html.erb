@@ -1,0 +1,86 @@
+<div style="background-color: rgba(255, 255, 255, 0.8); padding: 20px;"> 
+<h1>Showing playlists details</h1>
+
+<p><strong>Title: </strong><%= @playlist.title %></p>
+<p><strong>Description: </strong><%= @playlist.description %></p>
+<p><strong>Device: </strong><%= @playlist.device&.name %></p>
+<b>User: </b><%= @playlist.user.username if @playlist.user %><br><br> 
+<%= link_to gravatar_for(@playlist.user), user_path(@playlist.user) %> <br> <br>
+<% if @playlist.medium.present? %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Songs</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 35%;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        tr:not(:last-child) td {
+            border-bottom: 1px solid gray;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Link to Listen</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @playlist.medium.each do |medium| %>
+            <tr>
+                <td><strong><%= medium.title %></strong></td> 
+                <td><%= medium.description %></td> 
+                <td><strong><a href="<%= medium.content_url %>" target="_blank">Listen</a></strong></td> 
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</body>
+</html>
+<% end %><br> <br>
+
+
+
+
+
+<% if logged_in? && (@playlist.user == current_user || current_user.admin?)%>
+
+  <div style="display: flex; justify-content: left;">
+
+    <form action="<%= edit_playlist_path(@playlist) %>" method="get" style="display: inline-block; margin-right: 10px;">
+      <button type="submit" class="btn btn-sm" style="background-color: #c3aed6; border-color: #c3aed6; color: white;">Edit</button>
+    </form>
+
+
+<% end %>
+
+    <span></span>
+    
+    <form action="<%= playlists_path %>" method="get" style="display: inline-block;">
+      <button type="submit" class="btn btn-sm" style="background-color: #c3aed6; border-color: #c3aed6; color: white;">Return to playlists</button>
+    </form>
+
+  </div>
+
+
+
+
+
+
